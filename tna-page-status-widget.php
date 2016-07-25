@@ -79,7 +79,7 @@ function page_status_dashboard_widget_function() {
 		$html .= '<td class="title">' . get_the_title();
 		$html .= $link;
 		$html .= '</td>';
-		$html .= '<td>' . $author . ' on<br />' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
+		$html .= '<td>' . $author . ' on ' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
 		$html .= '<td>' . $display_status . '</td>';
 		$html .= '</tr>';
 	endwhile;
