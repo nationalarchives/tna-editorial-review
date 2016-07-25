@@ -6,8 +6,14 @@
 .tna-page-status-widget table th {
     border-bottom: 1px solid #ccc;
 }
+.tna-page-status-widget table td.title {
+    width: 44%;
+}
 .tna-page-status-widget table td {
     padding: 5px 3px;
+}
+.tna-page-status-widget table tr td {
+    border-bottom: 1px solid #ccc;
 }
 .tna-page-status-widget tr.my-page {
     background-color: #ffffcc;
