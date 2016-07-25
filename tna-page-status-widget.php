@@ -37,14 +37,14 @@ function page_status_dashboard_widget_function() {
 	$loop = new WP_Query($query);
 
 	$current_user = wp_get_current_user();
-	echo '<div class="tna-page-status-widget current-user-id-'  . $current_user->ID . '">';
-	echo '<h4>Hello ' . $current_user->user_login . '</h4>';
-	echo '<table>';
-	echo '<tr>';
-	echo '<th>Title</th>';
-	echo '<th>Last modified by</th>';
-	echo '<th>Current status</th>';
-	echo '</tr>';
+	$html = '<div class="tna-page-status-widget current-user-id-'  . $current_user->ID . '">';
+	$html .= '<h4>Hello ' . $current_user->user_login . '</h4>';
+	$html .= '<table>';
+	$html .= '<tr>';
+	$html .= '<th>Title</th>';
+	$html .= '<th>Last modified by</th>';
+	$html .= '<th>Current status</th>';
+	$html .= '</tr>';
 
 	while ( $loop->have_posts() ) : $loop->the_post();
 		global $post;
@@ -60,13 +60,17 @@ function page_status_dashboard_widget_function() {
 		} else {
 			$display_status = 'with author';
 		}
-		echo '<tr class="page-'. $status . ' ' . $myPage . '">';
-		echo '<td>' . get_the_title(); edit_post_link('edit', ' ', '');
-		echo '</td>';
-		echo '<td>' . $author . '</td>';
-		echo '<td>' . $display_status . '</td>';
-		echo '</tr>';
+		$html .= '<tr class="page-'. $status . ' ' . $myPage . '">';
+		$html .= '<td>' . get_the_title();
+		$html .= '<a href="' . get_edit_post_link( $post->ID ) . '"> edit</a>';
+		$html .= '</td>';
+		$html .= '<td>' . $author . '</td>';
+		$html .= '<td>' . $display_status . '</td>';
+		$html .= '</tr>';
 	endwhile;
 
-	echo '</table></div>';
+	$html .= '</table></div>';
+
+	echo $html;
+
 }
