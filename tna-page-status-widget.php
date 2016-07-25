@@ -57,12 +57,14 @@ function page_status_dashboard_widget_function() {
 		}
 		if ($status == 'pending') {
 			$display_status = 'web editors reviewing';
+			$link = ' <a href="' . get_permalink( $post->ID ) . '">view</a>';
 		} else {
 			$display_status = 'with author';
+			$link = ' <a href="' . get_edit_post_link( $post->ID ) . '">edit</a>';
 		}
 		$html .= '<tr class="page-'. $status . ' ' . $myPage . '">';
 		$html .= '<td class="title">' . get_the_title();
-		$html .= '<a href="' . get_edit_post_link( $post->ID ) . '"> edit</a>';
+		$html .= $link;
 		$html .= '</td>';
 		$html .= '<td>' . $author . ' on<br />' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
 		$html .= '<td>' . $display_status . '</td>';
