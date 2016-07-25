@@ -9,17 +9,15 @@
  * License: GPL2
  */
 
+// Loads admin CSS
 function load_tna_page_status_admin_style() {
-	wp_register_style( 'custom_wp_admin_css', plugin_dir_url(__FILE__) . '/style.css', false, '1.0.0' );
+	wp_register_style( 'custom_wp_admin_css', plugin_dir_url(__FILE__) . '/style.css', false, '0.1' );
 	wp_enqueue_style( 'custom_wp_admin_css' );
 }
 add_action( 'admin_enqueue_scripts', 'load_tna_page_status_admin_style' );
 
-/**
- * Adds widget to the dashboard.
- */
+// Adds widget to dashboard
 function page_status_add_dashboard_widgets() {
-
 	wp_add_dashboard_widget(
 		'page_status_dashboard_widget',
 		'Pending and draft pages',
@@ -28,9 +26,7 @@ function page_status_add_dashboard_widgets() {
 }
 add_action( 'wp_dashboard_setup', 'page_status_add_dashboard_widgets' );
 
-/**
- * Page status function
- */
+// Page status function
 function page_status_dashboard_widget_function() {
 
 	$query = array(
@@ -47,7 +43,6 @@ function page_status_dashboard_widget_function() {
 	echo '<tr>';
 	echo '<th>Title</th>';
 	echo '<th>Last modified by</th>';
-	// echo '<th>Created by</th>';
 	echo '<th>Current status</th>';
 	echo '</tr>';
 
@@ -66,13 +61,11 @@ function page_status_dashboard_widget_function() {
 			$display_status = 'with author';
 		}
 		echo '<tr class="page-'. $status . ' ' . $myPage . '">';
-		echo '<td>' . get_the_title();
-		edit_post_link('edit', ' ', '');
+		echo '<td>' . get_the_title(); edit_post_link('edit', ' ', '');
 		echo '</td>';
 		echo '<td>' . $author . '</td>';
 		echo '<td>' . $display_status . '</td>';
 		echo '</tr>';
-
 	endwhile;
 
 	echo '</table></div>';
