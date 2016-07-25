@@ -57,7 +57,8 @@ function page_status_dashboard_widget_function() {
 		}
 		if ($status == 'pending') {
 			$display_status = 'web editors reviewing';
-			$link = ' <a href="' . get_permalink( $post->ID ) . '">view</a>';
+			$link = ' <a href="' . get_edit_post_link( $post->ID ) . '">edit</a>';
+			// $link = ' <a href="' . get_permalink( $post->ID ) . '">view</a>';
 		} else {
 			$display_status = 'with author';
 			$link = ' <a href="' . get_edit_post_link( $post->ID ) . '">edit</a>';
