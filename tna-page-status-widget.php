@@ -61,10 +61,10 @@ function page_status_dashboard_widget_function() {
 			$display_status = 'with author';
 		}
 		$html .= '<tr class="page-'. $status . ' ' . $myPage . '">';
-		$html .= '<td>' . get_the_title();
+		$html .= '<td class="title">' . get_the_title();
 		$html .= '<a href="' . get_edit_post_link( $post->ID ) . '"> edit</a>';
 		$html .= '</td>';
-		$html .= '<td>' . $author . '</td>';
+		$html .= '<td>' . $author . ' on<br />' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
 		$html .= '<td>' . $display_status . '</td>';
 		$html .= '</tr>';
 	endwhile;
