@@ -26,6 +26,18 @@ function page_status_add_dashboard_widgets() {
 }
 add_action( 'wp_dashboard_setup', 'page_status_add_dashboard_widgets' );
 
+// Adds dashboard column option to screen options
+function dashboard_columns() {
+	add_screen_option(
+		'layout_columns',
+		array(
+			'max'     => 3,
+			'default' => 2
+		)
+	);
+}
+add_action( 'admin_head-index.php', 'dashboard_columns' );
+
 // Page status function
 function page_status_dashboard_widget_function() {
 
@@ -67,7 +79,7 @@ function page_status_dashboard_widget_function() {
 		$html .= '<td class="title">' . get_the_title();
 		$html .= $link;
 		$html .= '</td>';
-		$html .= '<td>' . $author . ' on<br />' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
+		$html .= '<td>' . $author . ' on ' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
 		$html .= '<td>' . $display_status . '</td>';
 		$html .= '</tr>';
 	endwhile;
