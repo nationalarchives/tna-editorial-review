@@ -1,0 +1,16 @@
+language:
+  - php
+
+php:
+  - 5.5
+
+install:
+  - composer require --dev phpunit/phpunit
+
+script:
+  - phpunit tests/StatusWidgetTest.php
+
+notifications:
+  slack:
+    rooms:
+      - tnawebteam:C2GnodnLsxhwwGvr0xAcajzc#code-builds
