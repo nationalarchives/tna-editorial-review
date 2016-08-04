@@ -1,5 +1,6 @@
 <?php
 
+/* Return top table */
 function returnTopTemplate($userID = false, $userLogin = false)
 {
     if ($userID === false || $userLogin === false) {
@@ -19,24 +20,51 @@ function returnTopTemplate($userID = false, $userLogin = false)
 
 }
 
+/* Return my_page class */
 function returnMyPageClass($author, $currentUserLogin)
 {
-    if($author === $currentUserLogin) {
+    if ($author === $currentUserLogin) {
         return 'my-page';
     }
     return 'not-my-page';
 
 }
 
+/* Return status variable */
 function returnDisplayStatus($status)
 {
-    if($status === 'pending') {
+    if ($status === 'pending') {
         $display_status = 'web editors reviewing';
     }
-    if($status === 'draft') {
+    if ($status === 'draft') {
         $display_status = 'with author';
     }
 
     return $display_status;
 
+}
+
+/* Return table rows*/
+function returnTableContent()
+{
+    /* Declare variables */
+    global $post, $current_user;
+    $status = get_post_status($post->ID);
+    $author = get_the_modified_author();
+    $edit_link = get_edit_post_link($post->ID);
+    $title = get_the_title();
+    $modified_date = get_the_modified_date($d = 'j/n/y');
+    $currentUserLogin = $current_user->user_login;
+    $myPageClass = returnMyPageClass($author, $currentUserLogin);
+    $display_status = returnDisplayStatus($status);
+
+
+    $tableContent = '<tr class="page-' . $status . ' ' . $myPageClass . '"><td class="title">' . $title . ' <a href="' . $edit_link . '">edit</a></td><td>' . $author . ' on ' . $modified_date . '</td><td>' . $display_status . '</td></tr>';
+
+    return $tableContent;
+}
+
+/* Return bottom table */
+function returnBottomTemplate() {
+    return '</table></div>';
 }

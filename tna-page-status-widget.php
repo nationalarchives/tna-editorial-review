@@ -42,7 +42,10 @@ add_action( 'admin_head-index.php', 'dashboard_columns' );
 
 // Page status function
 function page_status_dashboard_widget_function() {
+	/* Declare variables */
+	$current_user = wp_get_current_user();
 
+	/* Set the wp arguments */
 	$query = array(
 		'post_type' => 'page',
 		'post_status' => array('draft', 'pending'),
@@ -50,32 +53,17 @@ function page_status_dashboard_widget_function() {
 	);
 	$loop = new WP_Query($query);
 
-	$current_user = wp_get_current_user();
+	/* Return top table */
     echo returnTopTemplate( $current_user->ID, $current_user->user_login );
 
+	/* Loop through table rows */
 	while ( $loop->have_posts() ) : $loop->the_post();
-		global $post;
-		$status = get_post_status( $post->ID );
-		$author = get_the_modified_author();
-        $edit_link = get_edit_post_link( $post->ID );
-        $title = get_the_title();
-        $modified_date = get_the_modified_date($d = 'j/n/y');
-		$currentUserLogin = $current_user->user_login;
-		$link = ' <a href="' . $edit_link . '">edit</a>';
-		$myPageClass = returnMyPageClass( $author, $currentUserLogin );
-		$display_status = returnDisplayStatus($status);
 
-		$html = '<tr class="page-'. $status . ' ' . $myPageClass . '">';
-		$html .= '<td class="title">' . $title;
-		$html .= $link;
-		$html .= '</td>';
-        $html .= '<td>' . $author . ' on ' . $modified_date .'</td>';
-		$html .= '<td>' . $display_status . '</td>';
-		$html .= '</tr>';
+		echo returnTableContent();
+
 	endwhile;
 
-	$html .= '</table></div>';
-
-	echo $html;
+	/* Return bottom table */
+	echo returnBottomTemplate();
 
 }
