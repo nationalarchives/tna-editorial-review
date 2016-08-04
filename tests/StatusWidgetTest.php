@@ -69,7 +69,7 @@ class StatusWidgetTest extends PHPUnit_Framework_TestCase
     public function testIfNotMyPage()
     {
         $cls = returnMyPageClass('William', 'Horatio');
-        $this->assertEquals($cls, '');
+        $this->assertEquals($cls, 'not-my-page');
     }
 
     public function testPendingStatus()

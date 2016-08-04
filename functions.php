@@ -24,7 +24,7 @@ function returnMyPageClass($author, $currentUserLogin)
     if($author === $currentUserLogin) {
         return 'my-page';
     }
-    return '';
+    return 'not-my-page';
 
 }
 
