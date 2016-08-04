@@ -9,6 +9,8 @@
  * License: GPL2
  */
 
+include 'functions.php';
+
 // Loads admin CSS
 function load_tna_page_status_admin_style() {
 	wp_register_style( 'custom_wp_admin_css', plugin_dir_url(__FILE__) . '/style.css', false, '0.1' );
@@ -50,7 +52,7 @@ function page_status_dashboard_widget_function() {
 
 	$current_user = wp_get_current_user();
 
-    returnTopTemplate($current_user->ID, $current_user->user_login);
+    returnTopTemplate( $current_user->ID, $current_user->user_login );
 
 	while ( $loop->have_posts() ) : $loop->the_post();
 		global $post;
@@ -59,8 +61,9 @@ function page_status_dashboard_widget_function() {
         $edit_link = get_edit_post_link( $post->ID );
         $title = get_the_title();
         $modified_date = get_the_modified_date($d = 'j/n/y');
+		$currentUserLogin = $current_user->user_login;
 
-		$myPageClass = returnMyPageClass($author == $current_user->user_login );
+		$myPageClass = returnMyPageClass( $author, $currentUserLogin );
 
 		if ($status == 'pending') {
 			$display_status = 'web editors reviewing';
