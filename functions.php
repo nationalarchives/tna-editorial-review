@@ -18,3 +18,12 @@ function returnTopTemplate($userID = false, $userLogin = false)
     return sprintf($template, $userID, $userLogin);
 
 }
+
+function returnMyPageClass($author, $currentUserLogin)
+{
+    if($author === $currentUserLogin) {
+        return 'my-page';
+    }
+    return '';
+
+}

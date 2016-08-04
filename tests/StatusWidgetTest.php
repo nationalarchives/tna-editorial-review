@@ -60,5 +60,16 @@ class StatusWidgetTest extends PHPUnit_Framework_TestCase
         $this->assertRegExp('/Hello William Shakespeare/', $returned_value);
     }
 
+    public function testIfIsMyPage()
+    {
+        $cls = returnMyPageClass('William', 'William');
+        $this->assertEquals($cls, 'my-page');
+    }
+
+    public function testIfNotMyPage()
+    {
+        $cls = returnMyPageClass('William', 'Horatio');
+        $this->assertEquals($cls, '');
+    }
 
 }

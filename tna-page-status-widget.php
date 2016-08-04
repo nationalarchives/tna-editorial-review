@@ -49,37 +49,31 @@ function page_status_dashboard_widget_function() {
 	$loop = new WP_Query($query);
 
 	$current_user = wp_get_current_user();
-	$html = '<div class="tna-page-status-widget current-user-id-'  . $current_user->ID . '">';
-	$html .= '<h4>Hello ' . $current_user->user_login . '</h4>';
-	$html .= '<table>';
-	$html .= '<tr>';
-	$html .= '<th>Title</th>';
-	$html .= '<th>Last modified by</th>';
-	$html .= '<th>Current status</th>';
-	$html .= '</tr>';
+
+    returnTopTemplate($current_user->ID, $current_user->user_login);
 
 	while ( $loop->have_posts() ) : $loop->the_post();
 		global $post;
 		$status = get_post_status( $post->ID );
 		$author = get_the_modified_author();
-		if ( $author == $current_user->user_login ) {
-			$myPage = 'my-page';
-		} else {
-			$myPage = '';
-		}
+        $edit_link = get_edit_post_link( $post->ID );
+        $title = get_the_title();
+        $modified_date = get_the_modified_date($d = 'j/n/y');
+
+		$myPageClass = returnMyPageClass($author == $current_user->user_login );
+
 		if ($status == 'pending') {
 			$display_status = 'web editors reviewing';
-			$link = ' <a href="' . get_edit_post_link( $post->ID ) . '">edit</a>';
-			// $link = ' <a href="' . get_permalink( $post->ID ) . '">view</a>';
+			$link = ' <a href="' . $edit_link . '">edit</a>';
 		} else {
 			$display_status = 'with author';
-			$link = ' <a href="' . get_edit_post_link( $post->ID ) . '">edit</a>';
+			$link = ' <a href="' . $edit_link . '">edit</a>';
 		}
-		$html .= '<tr class="page-'. $status . ' ' . $myPage . '">';
-		$html .= '<td class="title">' . get_the_title();
+		$html = '<tr class="page-'. $status . ' ' . $myPageClass . '">';
+		$html .= '<td class="title">' . $title;
 		$html .= $link;
 		$html .= '</td>';
-		$html .= '<td>' . $author . ' on ' . get_the_modified_date( $d = 'j/n/y' ) .'</td>';
+        $html .= '<td>' . $author . ' on ' . $modified_date .'</td>';
 		$html .= '<td>' . $display_status . '</td>';
 		$html .= '</tr>';
 	endwhile;
