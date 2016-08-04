@@ -27,3 +27,16 @@ function returnMyPageClass($author, $currentUserLogin)
     return '';
 
 }
+
+function returnDisplayStatus($status)
+{
+    if($status === 'pending') {
+        $display_status = 'web editors reviewing';
+    }
+    if($status === 'draft') {
+        $display_status = 'with author';
+    }
+
+    return $display_status;
+
+}

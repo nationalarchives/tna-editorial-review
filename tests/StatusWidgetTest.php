@@ -72,6 +72,16 @@ class StatusWidgetTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($cls, '');
     }
 
+    public function testPendingStatus()
+    {
+        $status = returnDisplayStatus('pending');
+        $this->assertEquals($status, 'web editors reviewing');
+    }
 
+    public function testDraftStatus()
+    {
+        $status = returnDisplayStatus('draft');
+        $this->assertEquals($status, 'with author');
+    }
 
 }

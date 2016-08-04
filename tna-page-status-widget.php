@@ -51,8 +51,7 @@ function page_status_dashboard_widget_function() {
 	$loop = new WP_Query($query);
 
 	$current_user = wp_get_current_user();
-
-    returnTopTemplate( $current_user->ID, $current_user->user_login );
+    echo returnTopTemplate( $current_user->ID, $current_user->user_login );
 
 	while ( $loop->have_posts() ) : $loop->the_post();
 		global $post;
@@ -62,16 +61,10 @@ function page_status_dashboard_widget_function() {
         $title = get_the_title();
         $modified_date = get_the_modified_date($d = 'j/n/y');
 		$currentUserLogin = $current_user->user_login;
-
+		$link = ' <a href="' . $edit_link . '">edit</a>';
 		$myPageClass = returnMyPageClass( $author, $currentUserLogin );
+		$display_status = returnDisplayStatus($status);
 
-		if ($status == 'pending') {
-			$display_status = 'web editors reviewing';
-			$link = ' <a href="' . $edit_link . '">edit</a>';
-		} else {
-			$display_status = 'with author';
-			$link = ' <a href="' . $edit_link . '">edit</a>';
-		}
 		$html = '<tr class="page-'. $status . ' ' . $myPageClass . '">';
 		$html .= '<td class="title">' . $title;
 		$html .= $link;
