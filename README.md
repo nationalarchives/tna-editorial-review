@@ -1,8 +1,12 @@
 ![Travis CI notification](https://travis-ci.org/nationalarchives/tna-page-status-widget.svg?branch=feature%2Fadding_travis)
 
-# tna-page-status-widget
+# tna-editorial-review
 
-WordPress plugin, displays a list of pages with pending and draft statuses on the dashboard.
+The National Archives editorial review workflow plugin.
+
+## tna-page-status-widget
+
+Displays a list of pages with pending and draft statuses on the dashboard.
 
 ## Travis integration
 
