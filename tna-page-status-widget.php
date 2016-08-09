@@ -1,4 +1,9 @@
 <?php
+/**
+ * Page status dashboard widget
+ * Displays a list of pages with pending and draft statuses on the dashboard
+ *
+ */
 
 // Adds widget to dashboard
 function page_status_add_dashboard_widgets() {
