@@ -22,23 +22,17 @@ function wp_mail_set_text_body($phpmailer) {
 }
 add_action('phpmailer_init','wp_mail_set_text_body');
 
-function get_user_changes_comments( $myChanges ) {
-	if ($myChanges) {
-		return filter_input(INPUT_POST, $myChanges, FILTER_SANITIZE_SPECIAL_CHARS);
-	} else {
-		return 'No user comments';
-	}
-}
-
 function notify_editor_of_pending( $post ) {
-	$comments = get_user_changes_comments('my-changes');
+	global $post;
+	$comments = get_user_changes_comments( filter_input(INPUT_POST, 'my-changes', FILTER_SANITIZE_SPECIAL_CHARS) );
 	$current_user = wp_get_current_user();
 	$user_name = $current_user->display_name;
-	$web_editor = get_userdata(2);
-	$to = array( $web_editor->user_email, $current_user->user_email );
+	$to = array( get_web_editor_email(2), $current_user->user_email );
 	$subject = 'Editorial review: ' . $user_name . ' submitted a page for review';
 	$message = '<p><strong>' . $user_name . '</strong> has submitted <strong>' . get_the_title() . '</strong> for review.</p>';
 	$message .= '<p>Page title: ' . get_the_title() . ' <a href="' . wp_get_shortlink() . '&preview=true">Preview</a> <a href="' . get_edit_post_link() . '">Edit</a></p>';
+	$message .= '<p>Page hierarchy: ' . get_permalink() . '</p>';
+	$message .= '<p>Page ID: ' . $post->ID . '</p>';
 	$message .= '<p>Modified: ' . get_the_modified_date($d = 'j/n/y G:i') . '</p>';
 	$message .= '<p>' . $user_name . ' comments: ' . $comments . '</p>';
 	wp_mail( $to, $subject, $message );
