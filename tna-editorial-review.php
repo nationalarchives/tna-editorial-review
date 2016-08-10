@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: TNA Editorial review
- * Plugin URI: https://github.com/nationalarchives/tna-editorial-reivew
+ * Plugin URI: https://github.com/nationalarchives/tna-editorial-review
  * Description: The National Archives editorial review workflow plugin.
  * Version: 0.1
  * Author: Chris Bishop
@@ -29,4 +29,5 @@ function dashboard_columns() {
 add_action( 'admin_head-index.php', 'dashboard_columns' );
 
 include 'functions.php';
+include 'tna-email-notification.php';
 include 'tna-page-status-widget.php';

@@ -84,4 +84,16 @@ class StatusWidgetTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($status, 'with author');
     }
 
+    public function testUserChangesCommentsCompleted()
+    {
+        $comment = get_user_changes_comments('comments');
+        $this->assertEquals($comment, 'comments');
+    }
+
+    public function testUserChangesCommentsEmpty()
+    {
+        $comment = get_user_changes_comments( false );
+        $this->assertEquals($comment, 'No comments provided');
+    }
+
 }

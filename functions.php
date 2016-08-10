@@ -68,3 +68,19 @@ function returnTableContent()
 function returnBottomTemplate() {
     return '</table></div>';
 }
+
+// Email notification function
+function get_user_changes_comments( $myChanges ) {
+    if ($myChanges) {
+        return $myChanges;
+    }
+    return 'No comments provided';
+}
+
+// Email notification function
+function get_web_editor_email( $userData = false ) {
+    if ($userData) {
+        return $userData->user_email;
+    }
+    return false;
+}
