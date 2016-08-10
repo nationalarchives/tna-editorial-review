@@ -74,10 +74,16 @@ function notify_editor_of_pending( $post ) {
 		'fields' => array( 'display_name', 'user_email' )
 	);
 	$users = get_users( $args );
-	foreach ($users as $user) {
-		$to = array( $user->user_email, $current_user->user_email );
+	if ($users) {
+		foreach ($users as $user) {
+			$to = array( $user->user_email, $current_user->user_email );
+			wp_mail( $to, $subject, $message );
+		}
+	} else {
+		$to = array( $current_user->user_email );
 		wp_mail( $to, $subject, $message );
 	}
+
 }
 add_action( 'new_to_pending', 'notify_editor_of_pending' );
 add_action( 'draft_to_pending', 'notify_editor_of_pending' );
