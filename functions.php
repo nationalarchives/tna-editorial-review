@@ -73,17 +73,14 @@ function returnBottomTemplate() {
 function get_user_changes_comments( $myChanges ) {
     if ($myChanges) {
         return $myChanges;
-    } else {
-        return 'No comments provided';
     }
+    return 'No comments provided';
 }
 
 // Email notification function
-function get_web_editor_email( $webEditorUserId ) {
-    if ($webEditorUserId) {
-        $web_editor = get_userdata($webEditorUserId);
-        if ($web_editor) {
-            return $web_editor->user_email;
-        }
+function get_web_editor_email( $userData = false ) {
+    if ($userData) {
+        return $userData->user_email;
     }
+    return false;
 }
