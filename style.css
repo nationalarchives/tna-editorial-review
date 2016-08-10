@@ -18,3 +18,6 @@
 .tna-page-status-widget tr.my-page {
     background-color: #ffffcc;
 }
+.changes-comment textarea {
+    width: 100%;
+}
