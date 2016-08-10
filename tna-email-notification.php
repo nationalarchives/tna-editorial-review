@@ -15,18 +15,31 @@ function adds_tell_us_what_changes_textarea(){
 	<?php
 }
 
-add_action('phpmailer_init','wp_mail_set_text_body');
+function user_email_notifications( $user ) {
+	?>
+	<h3>Editorial review</h3>
+	<table class="form-table">
+		<tr>
+			<th scope="row">Email notifications</th>
+			<td>
+				<label for="notification">
+					<input id="notification" type="checkbox" name="notification" value="true" <?php checked( esc_attr( get_user_meta( $user->ID, 'notification', true ) ), 'true' ); ?> />
+					Subscribe to email notifications
+				</label>
+			</td>
+		</tr>
+	</table>
+<?php }
+add_action( 'show_user_profile', 'user_email_notifications' );
+add_action( 'edit_user_profile', 'user_email_notifications' );
+
 function wp_mail_set_text_body($phpmailer) {
 	if (empty($phpmailer->AltBody)) {$phpmailer->AltBody = strip_tags($phpmailer->Body);}
 }
+add_action('phpmailer_init','wp_mail_set_text_body');
 
 function notify_editor_for_pending( $post ) {
-	$changes = filter_input(INPUT_POST, 'changes', FILTER_SANITIZE_SPECIAL_CHARS);
-	if ($changes) {
-		$comments = $changes;
-	} else {
-		$comments = 'No user comments';
-	}
+	$comments = filter_input(INPUT_POST, 'changes', FILTER_SANITIZE_SPECIAL_CHARS);
 	$current_user = wp_get_current_user();
 	$user = $current_user->display_name;
 	$to = array ( 'domingobishop@gmail.com', $current_user->user_email );
