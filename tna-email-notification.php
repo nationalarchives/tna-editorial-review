@@ -38,12 +38,11 @@ function notify_editor_of_pending( $post ) {
 
 	// Greeting
 	$greetings = array( 'Hello', 'G&lsquo;day', 'Hey', 'Buna', 'Kon&lsquo;nichiwa', 'Bonjour', 'Hola', 'Ciao' );
-	$rand_keys = array_rand($greetings, 1);
 
 	// Email message
 	$message = '<html><head><title>Editorial review: ' . $user_name . ' submitted a page for review</title><style type="text/css">a{color:#0073aa;}</style></head>';
 	$message .= '<body style="font-family:Arial,sans-serif;font-size:16px;">';
-	$message .= $greetings[$rand_keys] . ' web editor,';
+	$message .= $greetings[array_rand($greetings, 1)] . ' web editor,';
 	$message .= '<h3><strong style="color:#0073aa;">' . $user_name . '</strong> has submitted <strong style="color:#0073aa;">' . get_the_title() . '</strong> for review</h3>';
 	$message .= '<p>Page title: ' . get_the_title() . ' ';
 	$message .= '<small>( <a href="' . wp_get_shortlink() . '&preview=true">Preview</a> | ';
