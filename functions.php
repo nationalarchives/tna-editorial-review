@@ -1,6 +1,11 @@
 <?php
 
-/* Return top table */
+/**
+ * Page status dashboard widget functions
+ *
+ */
+
+// Return top table
 function returnTopTemplate($userID = false, $userLogin = false)
 {
     if ($userID === false || $userLogin === false) {
@@ -20,7 +25,7 @@ function returnTopTemplate($userID = false, $userLogin = false)
 
 }
 
-/* Return my_page class */
+// Return my_page class
 function returnMyPageClass($author, $currentUserLogin)
 {
     if ($author === $currentUserLogin) {
@@ -30,7 +35,7 @@ function returnMyPageClass($author, $currentUserLogin)
 
 }
 
-/* Return status variable */
+// Return status variable
 function returnDisplayStatus($status)
 {
     if ($status === 'pending') {
@@ -44,7 +49,7 @@ function returnDisplayStatus($status)
 
 }
 
-/* Return table rows*/
+// Return table rows
 function returnTableContent()
 {
     /* Declare variables */
@@ -64,12 +69,17 @@ function returnTableContent()
     return $tableContent;
 }
 
-/* Return bottom table */
+// Return bottom table
 function returnBottomTemplate() {
     return '</table></div>';
 }
 
-// Email notification function
+/**
+ * Submit page for review email notification functions
+ *
+ */
+
+// Email notification function gets user comments
 function get_user_changes_comments( $myChanges ) {
     if ($myChanges) {
         return $myChanges;
@@ -77,7 +87,7 @@ function get_user_changes_comments( $myChanges ) {
     return 'No comments provided';
 }
 
-// Email notification function
+// Email notification function gets web editor email address via ID
 function get_web_editor_email( $userData = false ) {
     if ($userData) {
         return $userData->user_email;

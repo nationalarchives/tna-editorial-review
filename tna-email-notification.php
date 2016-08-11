@@ -9,7 +9,7 @@ add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' 
 function adds_tell_us_what_changes_textarea(){
 	?>
 	<div class="misc-pub-section changes-comment">
-		<label for="my-changes">Tell us what changes you have made</label><br />
+		<label for="my-changes">Tell us what changes you have made:</label><br />
 		<textarea id="my-changes" name="my-changes"></textarea>
 	</div>
 	<?php
