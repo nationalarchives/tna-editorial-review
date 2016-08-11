@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: TNA Editorial review
+ * Plugin Name: TNA Editorial Review
  * Plugin URI: https://github.com/nationalarchives/tna-editorial-review
  * Description: The National Archives editorial review workflow plugin.
  * Version: 0.1
