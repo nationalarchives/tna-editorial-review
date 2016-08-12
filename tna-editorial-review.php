@@ -26,7 +26,7 @@ function dashboard_columns() {
 		)
 	);
 }
-add_action( 'admin_head-index.php', 'dashboard_columns' );
+// add_action( 'admin_head-index.php', 'dashboard_columns' );
 
 include 'functions.php';
 include 'tna-email-notification.php';
