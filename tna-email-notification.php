@@ -7,12 +7,14 @@
 
 add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 function adds_tell_us_what_changes_textarea(){
-	?>
+	global $post;
+	$status = get_post_status( $post->ID );
+	if ( $status == 'draft' || $status == 'auto-draft' ) { ?>
 	<div class="misc-pub-section changes-comment">
 		<label for="my-changes">Tell us what changes you have made:</label><br />
 		<textarea id="my-changes" name="my-changes"></textarea>
 	</div>
-	<?php
+	<?php }
 }
 
 function wp_mail_set_text_body($phpmailer) {
@@ -40,10 +42,12 @@ function notify_editor_of_pending( $post ) {
 	$greetings = array( 'Hello', 'G&lsquo;day', 'Hey', 'Buna', 'Kon&lsquo;nichiwa', 'Bonjour', 'Hola', 'Ciao' );
 
 	// Email message
-	$message = '<html><head><title>Editorial review: ' . $user_name . ' submitted a page for review</title><style type="text/css">a{color:#0073aa;}</style></head>';
+	$message = '<html><head><title>Editorial review: ' . $user_name . ' submitted a page for review</title>';
+	$message .= '<style type="text/css">a{color:#0073aa;}</style></head>';
 	$message .= '<body style="font-family:Arial,sans-serif;font-size:16px;">';
 	$message .= $greetings[array_rand($greetings, 1)] . ' web editor,';
-	$message .= '<h3><strong style="color:#0073aa;">' . $user_name . '</strong> has submitted <strong style="color:#0073aa;">' . get_the_title() . '</strong> for review</h3>';
+	$message .= '<h3><strong style="color:#0073aa;">' . $user_name . '</strong> has submitted ';
+	$message .= '<strong style="color:#0073aa;">' . get_the_title() . '</strong> for review</h3>';
 	$message .= '<p>Page title: ' . get_the_title() . ' ';
 	$message .= '<small>( <a href="' . wp_get_shortlink() . '&preview=true">Preview</a> | ';
 	$message .= '<a href="' . get_edit_post_link() . '">Edit</a> )</small></p>';
