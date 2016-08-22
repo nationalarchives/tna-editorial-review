@@ -78,7 +78,7 @@ function html_email_body( $sender, $title, $shortlink, $edit_link, $page_url, $d
 
 function notify_editor_of_pending() {
 
-	// Current user
+	// Current user (Sender)
 	$current_user = wp_get_current_user();
 
 	// Send email to these email addresses
