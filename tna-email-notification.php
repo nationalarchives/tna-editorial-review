@@ -5,7 +5,6 @@
  *
  */
 
-add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 function adds_tell_us_what_changes_textarea(){
 	global $post;
 	$status = get_post_status( $post->ID );
@@ -16,26 +15,7 @@ function adds_tell_us_what_changes_textarea(){
 	</div>
 	<?php }
 }
-
-function get_current_user_role() {
-	$current_user = wp_get_current_user();
-	$roles = $current_user->roles;
-	$role = array_shift($roles);
-	return $role;
-}
-
-function hide_publish_button() {
-	global $post;
-	$status = get_post_status( $post->ID );
-	if ( $status == 'pending' && get_current_user_role() == 'author' ) { ?>
-		<style type="text/css" media="screen">
-			#publishing-action, #delete-action {
-				display: none;
-			}
-		</style>
-	<?php }
-}
-add_action( 'admin_head', 'hide_publish_button' );
+add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 
 function wp_mail_set_text_body( $phpmailer ) {
 	if (empty($phpmailer->AltBody)) {

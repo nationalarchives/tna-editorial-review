@@ -28,6 +28,15 @@ function dashboard_columns() {
 }
 // add_action( 'admin_head-index.php', 'dashboard_columns' );
 
+// Gets current user's role
+function get_current_user_role() {
+	$current_user = wp_get_current_user();
+	$roles = $current_user->roles;
+	$role = array_shift($roles);
+	return $role;
+}
+
 include 'functions.php';
 include 'tna-email-notification.php';
 include 'tna-page-status-widget.php';
+include 'tna-author-rules.php';
