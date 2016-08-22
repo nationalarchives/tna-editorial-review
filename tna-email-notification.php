@@ -17,6 +17,26 @@ function adds_tell_us_what_changes_textarea(){
 	<?php }
 }
 
+function get_current_user_role() {
+	$current_user = wp_get_current_user();
+	$roles = $current_user->roles;
+	$role = array_shift($roles);
+	return $role;
+}
+
+function hide_publish_button() {
+	global $post;
+	$status = get_post_status( $post->ID );
+	if ( $status == 'pending' && get_current_user_role() == 'author' ) { ?>
+		<style type="text/css" media="screen">
+			#publishing-action, #delete-action {
+				display: none;
+			}
+		</style>
+	<?php }
+}
+add_action( 'admin_head', 'hide_publish_button' );
+
 function wp_mail_set_text_body( $phpmailer ) {
 	if (empty($phpmailer->AltBody)) {
 		$phpmailer->AltBody = strip_tags($phpmailer->Body);
@@ -104,3 +124,6 @@ function notify_editor_of_pending() {
 add_action( 'new_to_pending', 'notify_editor_of_pending' );
 add_action( 'draft_to_pending', 'notify_editor_of_pending' );
 add_action( 'auto-draft_to_pending', 'notify_editor_of_pending' );
+
+
+
