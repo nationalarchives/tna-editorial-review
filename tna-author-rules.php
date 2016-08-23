@@ -59,6 +59,7 @@ function change_status( $post_id ) {
 }
 add_action('publish_post', 'change_status');
 
+// Removes capabilities
 function take_away_publish_permissions() {
 	$role = get_role( 'author' );
 	$role->remove_cap( 'publish_posts' );
