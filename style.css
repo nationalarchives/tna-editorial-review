@@ -21,3 +21,13 @@
 .changes-comment textarea {
     width: 100%;
 }
+.pending-message p {
+    padding: 3px;
+    background-color: #ffffcc;
+    color: darkred;
+    text-align: center;
+}
+#draft-action {
+    padding: 5px 10px 10px 10px;
+    text-align: right;
+}
