@@ -1,6 +1,6 @@
 <?php
 
-// Hides the publish button if status is pending the current user is an author
+// Hides the publish button if status is pending and the current user is an author
 function hide_action_button() {
 	$status = get_post_status();
 	$current_screen = get_current_screen();
