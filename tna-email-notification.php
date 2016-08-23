@@ -5,7 +5,6 @@
  *
  */
 
-add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 function adds_tell_us_what_changes_textarea(){
 	global $post;
 	$status = get_post_status( $post->ID );
@@ -16,6 +15,7 @@ function adds_tell_us_what_changes_textarea(){
 	</div>
 	<?php }
 }
+add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 
 function wp_mail_set_text_body( $phpmailer ) {
 	if (empty($phpmailer->AltBody)) {
@@ -78,7 +78,7 @@ function html_email_body( $sender, $title, $shortlink, $edit_link, $page_url, $d
 
 function notify_editor_of_pending() {
 
-	// Current user
+	// Current user (Sender)
 	$current_user = wp_get_current_user();
 
 	// Send email to these email addresses
@@ -104,3 +104,6 @@ function notify_editor_of_pending() {
 add_action( 'new_to_pending', 'notify_editor_of_pending' );
 add_action( 'draft_to_pending', 'notify_editor_of_pending' );
 add_action( 'auto-draft_to_pending', 'notify_editor_of_pending' );
+
+
+
