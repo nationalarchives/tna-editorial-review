@@ -2,11 +2,12 @@
 
 // Hides the publish button if status is pending the current user is an author
 function hide_action_button() {
-	global $post;
-	$status = get_post_status( $post->ID );
-	$css = '<style type="text/css" media="screen">#major-publishing-actions{display:none;}</style>';
-	if ( get_current_user_role() == 'author' && $status == 'pending' ) {
-		echo $css;
+	if ( get_current_user_role() == 'author' ) {
+		global $post;
+		$status = get_post_status( $post->ID );
+		if ( $status == 'pending' ) { ?>
+			<style type="text/css" media="screen">#major-publishing-actions{display:none;}</style>
+		<?php }
 	}
 }
 add_action( 'admin_head', 'hide_action_button' );
@@ -47,7 +48,7 @@ function change_publish_button( $translation, $text ) {
 		return $translation;
 	}
 }
-add_filter( 'gettext', 'change_publish_button', 10, 2 );
+// add_filter( 'gettext', 'change_publish_button', 10, 2 );
 
 // Author can't publish when updating an existing page
 function change_status( $post_id ) {
@@ -64,4 +65,4 @@ function take_away_publish_permissions() {
 	$role = get_role( 'author' );
 	$role->remove_cap( 'publish_posts' );
 }
-add_action( 'init', 'take_away_publish_permissions' );
+// add_action( 'init', 'take_away_publish_permissions' );
