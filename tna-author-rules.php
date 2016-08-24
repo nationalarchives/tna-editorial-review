@@ -1,20 +1,33 @@
 <?php
 
+function is_edit_page($new_edit = null){
+	global $pagenow;
+	//make sure we are on the backend
+	if (!is_admin()) return false;
+
+	if($new_edit == "edit")
+		return in_array( $pagenow, array( 'post.php',  ) );
+	elseif($new_edit == "new") //check for new post page
+		return in_array( $pagenow, array( 'post-new.php' ) );
+	else //check for either new or edit
+		return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
+}
+
 // Hides the publish button if status is pending and the current user is an author
 function hide_action_button() {
-	$status = get_post_status();
-	$current_screen = get_current_screen();
-	if ( $current_screen->base == 'post' && get_current_user_role() == 'author' && $status == 'pending' ) { ?>
+	if ( is_edit_page() ) {
+		$status = get_post_status();
+		if ( get_current_user_role() == 'author' && $status == 'pending' ) { ?>
 			<style type="text/css" media="screen">#major-publishing-actions{display:none;}</style>
-	<?php }
+		<?php }
+	}
 }
 add_action( 'admin_head', 'hide_action_button' );
 
 // Adds message when page status is pending
 function adds_editors_reviewing_message(){
 	$status = get_post_status();
-	$current_screen = get_current_screen();
-	if ( $current_screen->base == 'post' && get_current_user_role() == 'author' && $status == 'pending' ) { ?>
+	if ( get_current_user_role() == 'author' && $status == 'pending' ) { ?>
 		<div class="misc-pub-section pending-message">
 			<p><strong>Web editors reviewing</strong></p>
 		</div>
@@ -25,8 +38,7 @@ add_action( 'post_submitbox_misc_actions', 'adds_editors_reviewing_message' );
 // Adds save draft button
 function adds_save_draft_button() {
 	$status = get_post_status();
-	$current_screen = get_current_screen();
-	if ( $current_screen->base == 'post' && get_current_user_role() == 'author' && $status !== 'pending' ) { ?>
+	if ( get_current_user_role() == 'author' && $status !== 'pending' ) { ?>
 		<div id="draft-action">
 			<div id="save-action">
 				<input type="submit" name="save" id="save-post" value="Save Draft" class="button">
