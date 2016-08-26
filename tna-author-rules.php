@@ -1,17 +1,5 @@
 <?php
 
-// Returns true or type of page, if on an edit page
-function is_edit_page( $new_edit = null ) {
-	global $pagenow;
-	if ( !is_admin() ) return false;
-	if ( $new_edit == "edit" )
-		return in_array( $pagenow, array( 'post.php',  ) );
-	elseif ($new_edit == "new")
-		return in_array( $pagenow, array( 'post-new.php' ) );
-	else
-		return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
-}
-
 // Hides the publish button if status is pending and the current user is an author
 function hide_action_button() {
 	if ( is_edit_page() ) {
