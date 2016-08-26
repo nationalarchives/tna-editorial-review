@@ -16,24 +16,24 @@ function load_tna_page_status_admin_style() {
 }
 add_action( 'admin_enqueue_scripts', 'load_tna_page_status_admin_style' );
 
-// Adds dashboard column option to screen options
-function dashboard_columns() {
-	add_screen_option(
-		'layout_columns',
-		array(
-			'max'     => 3,
-			'default' => 2
-		)
-	);
-}
-// add_action( 'admin_head-index.php', 'dashboard_columns' );
-
 // Gets current user's role
 function get_current_user_role() {
 	$current_user = wp_get_current_user();
 	$roles = $current_user->roles;
 	$role = array_shift($roles);
 	return $role;
+}
+
+// Returns true or type of page, if on an edit page
+function is_edit_page( $new_edit = null ) {
+	global $pagenow;
+	if ( !is_admin() ) return false;
+	if ( $new_edit == "edit" )
+		return in_array( $pagenow, array( 'post.php',  ) );
+	elseif ($new_edit == "new")
+		return in_array( $pagenow, array( 'post-new.php' ) );
+	else
+		return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 }
 
 include 'functions.php';
