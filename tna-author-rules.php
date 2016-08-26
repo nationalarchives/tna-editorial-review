@@ -1,15 +1,14 @@
 <?php
 
+// Returns true or type of page, if on an edit page
 function is_edit_page($new_edit = null){
 	global $pagenow;
-	//make sure we are on the backend
 	if (!is_admin()) return false;
-
-	if($new_edit == "edit")
+	if ($new_edit == "edit")
 		return in_array( $pagenow, array( 'post.php',  ) );
-	elseif($new_edit == "new") //check for new post page
+	elseif ($new_edit == "new")
 		return in_array( $pagenow, array( 'post-new.php' ) );
-	else //check for either new or edit
+	else
 		return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 }
 
@@ -49,6 +48,15 @@ function adds_save_draft_button() {
 }
 add_action( 'post_submitbox_misc_actions', 'adds_save_draft_button' );
 
+function change_post_status( $data ) {
+	if ( get_current_user_role() == 'author' && $data['post_status'] !== 'pending' ) {
+		if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
+		$data['post_status'] = 'draft';
+	}
+	return $data;
+}
+add_filter('wp_insert_post_data', 'change_post_status', '99');
+
 // Author can't publish when updating an existing page
 function change_status( $post_id ) {
 	if ( get_current_user_role() == 'author' ) {
@@ -57,7 +65,17 @@ function change_status( $post_id ) {
 		add_action('save_post', 'change_status');
 	}
 }
-add_action('publish_post', 'change_status');
+// add_action('publish_post', 'change_status');
+
+// Author can't publish when updating an existing page
+function change_status_on_update( $post_id ) {
+	if ( get_current_user_role() == 'author' ) {
+		remove_action('save_post', 'change_status_on_update');
+		wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
+		add_action('save_post', 'change_status_on_update');
+	}
+}
+// add_action('pre_post_update', 'change_status_on_update');
 
 // Changes the action button text when edit page
 function change_publish_button( $translation, $text ) {
