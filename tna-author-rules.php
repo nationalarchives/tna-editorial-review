@@ -1,10 +1,10 @@
 <?php
 
 // Returns true or type of page, if on an edit page
-function is_edit_page($new_edit = null){
+function is_edit_page( $new_edit = null ) {
 	global $pagenow;
-	if (!is_admin()) return false;
-	if ($new_edit == "edit")
+	if ( !is_admin() ) return false;
+	if ( $new_edit == "edit" )
 		return in_array( $pagenow, array( 'post.php',  ) );
 	elseif ($new_edit == "new")
 		return in_array( $pagenow, array( 'post-new.php' ) );
@@ -33,20 +33,6 @@ function adds_editors_reviewing_message(){
 	<?php }
 }
 add_action( 'post_submitbox_misc_actions', 'adds_editors_reviewing_message' );
-
-// Adds save draft button
-function adds_save_draft_button() {
-	$status = get_post_status();
-	if ( get_current_user_role() == 'author' && $status !== 'pending' ) { ?>
-		<div id="draft-action">
-			<div id="save-action">
-				<input type="submit" name="save" id="save-post" value="Save Draft" class="button">
-			</div>
-			<div class="clear"></div>
-		</div>
-	<?php }
-}
-// add_action( 'post_submitbox_misc_actions', 'adds_save_draft_button' );
 
 // Author can't publish when updating an existing page
 function change_post_status( $data ) {
