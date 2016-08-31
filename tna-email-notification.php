@@ -58,7 +58,7 @@ function html_email_body( $sender, $title, $shortlink, $edit_link, $page_url, $d
 	$comments = get_user_changes_comments( filter_input(INPUT_POST, 'my-changes', FILTER_SANITIZE_SPECIAL_CHARS) );
 
 	// Greeting
-	$greetings = array( 'Hello', 'G&lsquo;day', 'Hey', 'Buna', 'Kon&lsquo;nichiwa', 'Bonjour', 'Hola', 'Ciao', 'Vannakam' );
+	$greetings = array( 'Hello', 'G&lsquo;day', 'Hey', 'Buna', 'Kon&lsquo;nichiwa', 'Bonjour', 'Hola', 'Ciao', 'Vannakam', 'Ni Hao' );
 
 	// HTML email body (This HTML format will only work with Outlook)
 	$html_message = '<p>' . $greetings[array_rand($greetings, 1)] . ' web editor,</p>';
