@@ -22,9 +22,17 @@ function page_status_dashboard_widget_function() {
 
 	// Set the wp arguments
 	$query = array(
-		'post_type' => 'page',
+		'post_type' => array(
+			'page',
+			'post',
+			// TNA post types
+			'online-exhibitions',
+			'im_guidance_link',
+			'lesson_sources'
+		),
 		'post_status' => array('draft', 'pending'),
-		'orderby' => 'modified'
+		'orderby' => 'modified',
+		'posts_per_page' => -1
 	);
 	$loop = new WP_Query($query);
 
