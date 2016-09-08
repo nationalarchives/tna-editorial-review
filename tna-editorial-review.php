@@ -37,6 +37,6 @@ function is_edit_page( $new_edit = null ) {
 }
 
 include 'functions.php';
+include 'tna-author-rules.php';
 include 'tna-email-notification.php';
 include 'tna-page-status-widget.php';
-include 'tna-author-rules.php';
