@@ -42,7 +42,7 @@ function returnDisplayStatus($status)
         $display_status = 'web editors reviewing';
     }
     if ($status === 'draft') {
-        $display_status = 'with author';
+        $display_status = 'with author (draft)';
     }
 
     return $display_status;
