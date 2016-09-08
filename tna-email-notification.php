@@ -11,7 +11,7 @@ function adds_tell_us_what_changes_textarea(){
 	if ( $status == 'draft' || $status == 'auto-draft' ) { ?>
 	<div class="misc-pub-section">
 		<div class="changes-comment">
-			<label for="my-changes">Tell us what changes you have made (This field submits your comment via email on 'Submit for review' only):</label><br />
+			<label for="my-changes"><strong>Tell us what changes you have made</strong>:<br>(this information will only be saved and sent when you press '<strong>Submit for review</strong>')</label><br />
 			<textarea id="my-changes" name="my-changes"></textarea>
 		</div>
 	</div>

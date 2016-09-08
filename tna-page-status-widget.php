@@ -24,7 +24,11 @@ function page_status_dashboard_widget_function() {
 	$query = array(
 		'post_type' => array(
 			'page',
-			'post'
+			'post',
+			// TNA post types
+			'online-exhibitions',
+			'im_guidance_link',
+			'lesson_sources'
 		),
 		'post_status' => array('draft', 'pending'),
 		'orderby' => 'modified',
