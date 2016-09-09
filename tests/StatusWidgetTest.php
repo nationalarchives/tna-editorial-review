@@ -81,7 +81,7 @@ class StatusWidgetTest extends PHPUnit_Framework_TestCase
     public function testDraftStatus()
     {
         $status = returnDisplayStatus('draft');
-        $this->assertEquals($status, 'with author');
+        $this->assertEquals($status, 'with author (draft)');
     }
 
     public function testUserChangesCommentsCompleted()
