@@ -19,12 +19,12 @@ function adds_tell_us_what_changes_textarea(){
 }
 add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 
-function wp_mail_set_text_body( $phpmailer ) {
+function er_wp_mail_set_text_body( $phpmailer ) {
 	if (empty($phpmailer->AltBody)) {
 		$phpmailer->AltBody = strip_tags($phpmailer->Body);
 	}
 }
-add_action('phpmailer_init','wp_mail_set_text_body');
+add_action('phpmailer_init','er_wp_mail_set_text_body');
 
 function html_email_subject_pending( $name ) {
 
