@@ -51,7 +51,7 @@ function er_admin_page() {
 			<h2>Reviewer</h2>
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><label for="er_editor_contact">Editor</label></th>
+					<th scope="row"><label for="er_editor_contact">Web editor</label></th>
 					<td><select id="er_editor_contact" name="er_editor_contact">
 							<option value="">Please select</option>
 							<?php foreach ( $editors as $editor ) {
