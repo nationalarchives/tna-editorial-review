@@ -22,7 +22,7 @@ function er_menu() {
 }
 
 function er_admin_page_settings() {
-	register_setting( 'er-settings-group', 'er_editor_contact' );
+	register_setting( 'er-settings-group', 'er_editor_email' );
 }
 
 function er_admin_page() {
@@ -52,12 +52,12 @@ function er_admin_page() {
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row"><label for="er_editor_contact">Web editor</label></th>
-					<td><select id="er_editor_contact" name="er_editor_contact">
+					<td><select id="er_editor_email" name="er_editor_email">
 							<option value="">Please select</option>
 							<?php foreach ( $editors as $editor ) {
 								$value = esc_html( $editor->user_login );
 								?>
-								<option <?php if (get_option('er_editor_contact') == $value) { echo ' selected="selected"'; }; ?> value="<?php echo $value ?>"><?php echo $value ?></option>
+								<option <?php if (get_option('er_editor_email') == $value) { echo ' selected="selected"'; }; ?> value="<?php echo $value ?>"><?php echo $value ?></option>
 							<?php } ?>
 						</select></td>
 				</tr>

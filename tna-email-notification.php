@@ -83,8 +83,18 @@ function notify_editor_of_pending() {
 	// Current user (Sender)
 	$current_user = wp_get_current_user();
 
+	$admin_email = get_option( 'admin_email' );
+
+	$editor_email = get_email_from_user_login(get_option('er_editor_email'));
+
+	if ( $editor_email ) {
+		$email = $editor_email;
+	} else {
+		$email = $admin_email;
+	}
+
 	// Send email to these email addresses
-	$to = array( get_web_editor_email( get_userdata(22) ), $current_user->user_email );
+	$to = array( $email, $current_user->user_email );
 
 	// Email Subject
 	$subject = html_email_subject_pending( $current_user->display_name );

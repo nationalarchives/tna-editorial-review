@@ -94,3 +94,20 @@ function get_web_editor_email( $userData = false ) {
     }
     return false;
 }
+
+// Gets email address from user login name
+function get_email_from_user_login( $user ) {
+    if ($user) {
+
+        global $wpdb;
+        $email = $wpdb->get_var( $wpdb->prepare("
+        SELECT user_email
+        FROM $wpdb->users
+        WHERE user_login = %s
+        ", $user
+        ) );
+
+        return $email;
+    }
+    return false;
+}
