@@ -85,7 +85,7 @@ function notify_editor_of_pending() {
 
 	$admin_email = get_option( 'admin_email' );
 
-	$editor_email = get_email_from_user_login(get_option('er_editor_email'));
+	$editor_email = get_email_from_user_login(get_option('er_editor_user'));
 
 	if ( $editor_email ) {
 		$email = $editor_email;
