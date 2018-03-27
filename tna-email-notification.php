@@ -93,6 +93,9 @@ function notify_editor_of_pending() {
 		$email = $admin_email;
 	}
 
+	// Email header
+	$headers = 'From: erFlow (DO NOT REPLY) <no-reply@nationalarchives.gov.uk>';
+
 	// Send email to these email addresses
 	$to = array( $email, $current_user->user_email );
 
@@ -111,7 +114,8 @@ function notify_editor_of_pending() {
 	           )
 	           . html_email_footer();
 
-	wp_mail( $to, $subject, $message );
+	wp_mail( $to, $subject, $message, $headers );
+
 }
 add_action( 'new_to_pending', 'notify_editor_of_pending' );
 add_action( 'draft_to_pending', 'notify_editor_of_pending' );
