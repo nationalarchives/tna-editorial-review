@@ -1,4 +1,4 @@
-![Travis CI notification](https://travis-ci.org/nationalarchives/tna-page-status-widget.svg?branch=feature%2Fadding_travis)
+![Travis CI notification](https://travis-ci.org/nationalarchives/tna-editorial-review.svg?branch=feature%2Fadding_travis)
 
 # tna-editorial-review
 
