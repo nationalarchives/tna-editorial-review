@@ -19,12 +19,12 @@ function adds_tell_us_what_changes_textarea(){
 }
 add_action( 'post_submitbox_misc_actions', 'adds_tell_us_what_changes_textarea' );
 
-function wp_mail_set_text_body( $phpmailer ) {
+function er_wp_mail_set_text_body( $phpmailer ) {
 	if (empty($phpmailer->AltBody)) {
 		$phpmailer->AltBody = strip_tags($phpmailer->Body);
 	}
 }
-add_action('phpmailer_init','wp_mail_set_text_body');
+add_action('phpmailer_init','er_wp_mail_set_text_body');
 
 function html_email_subject_pending( $name ) {
 
@@ -83,8 +83,21 @@ function notify_editor_of_pending() {
 	// Current user (Sender)
 	$current_user = wp_get_current_user();
 
+	$admin_email = get_option( 'admin_email' );
+
+	$editor_email = get_email_from_user_login(get_option('er_editor_user'));
+
+	if ( $editor_email ) {
+		$email = $editor_email;
+	} else {
+		$email = $admin_email;
+	}
+
+	// Email header
+	$headers = 'From: erFlow (DO NOT REPLY) <no-reply@nationalarchives.gov.uk>';
+
 	// Send email to these email addresses
-	$to = array( get_web_editor_email( get_userdata(22) ), $current_user->user_email );
+	$to = array( $email, $current_user->user_email );
 
 	// Email Subject
 	$subject = html_email_subject_pending( $current_user->display_name );
@@ -101,7 +114,8 @@ function notify_editor_of_pending() {
 	           )
 	           . html_email_footer();
 
-	wp_mail( $to, $subject, $message );
+	wp_mail( $to, $subject, $message, $headers );
+
 }
 add_action( 'new_to_pending', 'notify_editor_of_pending' );
 add_action( 'draft_to_pending', 'notify_editor_of_pending' );
