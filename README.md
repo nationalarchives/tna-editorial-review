@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-![Travis CI notification](https://travis-ci.org/nationalarchives/tna-editorial-review.svg?branch=feature%2Fadding_travis)
-=======
->>>>>>> Stashed changes
-
 # tna-editorial-review
 
 The National Archives editorial review workflow plugin.
