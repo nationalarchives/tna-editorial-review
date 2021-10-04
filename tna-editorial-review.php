@@ -3,7 +3,7 @@
  * Plugin Name: TNA Editorial Review
  * Plugin URI: https://github.com/nationalarchives/tna-editorial-review
  * Description: The National Archives editorial review workflow plugin.
- * Version: 0.5
+ * Version: 1.0 (2021-10-04)
  * Author: Chris Bishop
  * Author URI: https://github.com/nationalarchives
  * License: GPL2
